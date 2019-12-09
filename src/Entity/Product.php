@@ -52,7 +52,7 @@ class Product
      * @var int|null
      *
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({ "products:read", "products:write")
+     * @Groups({ "products:read", "products:write"})
      */
     private $price;
 

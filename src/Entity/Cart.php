@@ -59,11 +59,6 @@ class Cart
     private $products;
 
     /**
-     * @var Money
-     */
-    private $total;
-
-    /**
      * Cart constructor.
      *
      * @param User $user
