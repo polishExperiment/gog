@@ -48,7 +48,7 @@ class Cart
     /**
      * @var Collection|Product[]
      *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Product", inversedBy="carts")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Product")
      * @Groups({"cart:read", "cart:write"})
      * @ApiSubresource
      * @Assert\Count(

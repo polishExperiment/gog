@@ -1,10 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Money\Currency;
 use Money\Money;
@@ -57,19 +57,12 @@ class Product
     private $price;
 
     /**
-     * @var Collection|Cart[]
-     *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Cart", mappedBy="products")
-     * @Groups({"cart:write"})
-     */
-    private $carts;
-
-    /**
      * Product constructor.
      */
-    public function __construct()
+    public function __construct(string $title, ?int $price)
     {
-        $this->carts = new ArrayCollection();
+        $this->title = $title;
+        $this->price = $price;
     }
 
     /**
@@ -117,42 +110,6 @@ class Product
     public function setPrice(?int $price): self
     {
         $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Cart[]
-     */
-    public function getCarts(): Collection
-    {
-        return $this->carts;
-    }
-
-    /**
-     * @param Cart $cart
-     * @return $this
-     */
-    public function addCart(Cart $cart): self
-    {
-        if (!$this->carts->contains($cart)) {
-            $this->carts[] = $cart;
-            $cart->addProduct($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Cart $cart
-     * @return $this
-     */
-    public function removeCart(Cart $cart): self
-    {
-        if ($this->carts->contains($cart)) {
-            $this->carts->removeElement($cart);
-            $cart->removeProduct($this);
-        }
 
         return $this;
     }
